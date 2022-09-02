@@ -8,11 +8,24 @@ const displayAllNewsCatargory = catagories => {
     catagories.forEach(element => {
         const catagoryUl = document.createElement('ul');
         catagoryUl.classList.add('nav');
-        catagoryUl.innerHTML = `<li class="nav-item"> <button type="button" class="btn">${element.category_name}</button></li>`
+        catagoryUl.innerHTML = `<li class="nav-item"> <button type="button" class="btn" onclick="loadNews()">${element.category_name}</button></li>`
         catagoryContainer.appendChild(catagoryUl);
 
 
     });
 }
+
+const loadNews = async id => {
+    const url = `https://openapi.programming-hero.com/api/news/{news_id}`
+
+    const res = await fetch(url);
+    const data = await res.json();
+    console.log(data.data[0]._id)
+}
+
+const displayNews = news => {
+    const newsCard = document.getElementById('');
+}
+
 
 loadAllNewsCatargory();
