@@ -9,8 +9,9 @@
     <!-- Custom CSS Link -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- DaisyUi Link -->
+    <!-- DaisyUi And Tailwind  Link -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Font Awesome Link -->
     <script src="https://kit.fontawesome.com/2c779a1eee.js" crossorigin="anonymous"></script>
@@ -54,54 +55,108 @@
     </header>
     <main class="container">
         <section>
-            <div class="collapse">
-                <input type="checkbox" class="peer" />
-                <div
-                    class="collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-                    Click me to show/hide content
+            <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
+                <div class="collapse-title text-xl font-medium">
+                    Difference between var, let, and const Variable Declaration in JavaScript?
                 </div>
-                <div
-                    class="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-                    <p>hello</p>
-                </div>
-            </div>
-        </section>
-        <section>
-            <div class="collapse">
-                <input type="checkbox" class="peer" />
-                <div
-                    class="collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-                    Click me to show/hide content
-                </div>
-                <div
-                    class="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-                    <p>hello</p>
+                <div class="collapse-content">
+                    <p>The differences between var, let, and const variable declaration in JavaScript include:
+                        Variables declared with var and const are scoped to the immediate function body.
+                        Variables declared with the var keyword are hoisted. Hoisting means that the variable can be
+                        accessed in their enclosing scope even before they are declared.
+                        Variables declared with the let keyword are block-scoped, which means the variables will have
+                        scope to the immediate enclosing block.</p>
                 </div>
             </div>
         </section>
         <section>
-            <div class="collapse">
-                <input type="checkbox" class="peer" />
-                <div
-                    class="collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-                    Click me to show/hide content
+            <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
+                <div class="collapse-title text-xl font-medium">
+                    Difference Between Regular Function And Arrow Function?
                 </div>
-                <div
-                    class="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-                    <p>hello</p>
+                <div class="collapse-content">
+                    <p>Regular functions created using function declarations or expressions are constructible and
+                        callable. Since regular functions are constructible, they can be called using the new keyword.
+
+                        However, the arrow functions are only callable and not constructible, i.e arrow functions can
+                        never be used as constructor functions. Hence, they can never be invoked with the new keyword.
+                    </p>
                 </div>
             </div>
         </section>
         <section>
-            <div class="collapse">
-                <input type="checkbox" class="peer" />
-                <div
-                    class="collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-                    Click me to show/hide content
+            <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
+                <div class="collapse-title text-xl font-medium">
+                    Difference Between Map,forEach,filter and find?
                 </div>
-                <div
-                    class="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-                    <p>hello</p>
+                <div class="collapse-content">
+                    <p><strong>.forEach:</strong><br>
+
+                        .forEach(), is used to execute the same code on every element in an array but does not change
+                        the array and it returns undefined.</p>
+                    <p>Example:
+                        In the example below we would use .forEach() to iterate over an array of food and log that we
+                        would want to eat each of them. <br>
+
+                        let food = ['mango','rice','pepper','pear'];
+                        food.forEach(function(foodItem){ console.log('I want to eat '+foodItem);
+                        });</p>
+                    <p><strong>.map():</strong><br>
+                        .map() executes the same code on every element in an array and returns a new array with the
+                        updated elements. <br>
+
+                        Example:
+                        In the example below we would use .map to iterate over the elements of the cost array and divide
+                        each element by 10, then assign our new array containing the new cost to the variable newCost.
+                        <br>
+
+                        let cost = [100,400,300,700];
+                        let newCost = cost.map(function(costItem){ return costItem / 10;
+                        });
+                        console.log(newCost);
+                    <p><strong>.filter():</strong><br>
+                        .filter() checks every element in an array to see if it meets a certain criteria and returns a
+                        new array with the elements that return truthy for the criteria. <br>
+
+                        Example:
+                        In the example below we would use .filter to return values that are less than 200.br
+
+                        let cost = [100,400,50,40,700];
+                        let smallCost = cost.filter(function(costItem){ return costItem < 200 });
+                            console.log(smallCost);</p>
+                    </p>
+                    <p><strong>.find():</strong><br>
+                        In ES5, to find an element in an array, you use the indexOf() or lastIndexOf() methods. However,
+                        these methods are quite limited because they return the index of the first matching element
+                        only.
+
+                        ES6 introduced a new method called find() added to the Array.prototype object.
+
+                        The find() method returns the first element in an array that passes a test function. The
+                        following shows the syntax of the find() method:
+
+                        find(callback(element[, index[, array]])[, thisArg])
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div tabindex="0" class="collapse collapse-plus border border-base-300 bg-base-100 rounded-box">
+                <div class="collapse-title text-xl font-medium">
+                    Why Use Templete String?
+                </div>
+                <div class="collapse-content">
+                    <p>Template strings are a powerful feature of modern JavaScript released in ES6. It lets us
+                        insert/interpolate variables and expressions into strings without needing to concatenate like in
+                        older versions of JavaScript. It allows us to create strings that are complex and contain
+                        dynamic elements. Another great thing that comes with template strings are tags. Tags are
+                        functions that take a string and the decomposed parts of the string as parameters and are great
+                        for converting strings to different entities.
+
+                        The syntax for creating template strings is by using backticks to delimit them. For example, we
+                        can write:
+
+                        `This is a string`</p>
                 </div>
             </div>
         </section>
@@ -109,7 +164,7 @@
     <!-- JavaScripts Links -->
     <script src="js/news.js"></script>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+
 </body>
 
 </html>
