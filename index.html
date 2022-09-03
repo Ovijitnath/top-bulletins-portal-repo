@@ -52,8 +52,8 @@
         <!-- Search result found number section -->
         <section class="pt-5 container">
 
-            <div class="mb-3 bg-warning">
-                <h3 class="p-3">Items found</h3>
+            <div class="mb-3 text-primary text-center">
+                <h3 class="p-3"><span id="found-items"></span></h3>
             </div>
         </section>
 
@@ -74,9 +74,7 @@
             </div>
         </section>
 
-
-        </section>
-
+        <!-- Card container section -->
         <section>
             <div id="cards-container" class="nav justify-content-around shadow p-3 mb-5 bg-body rounded">
 
@@ -89,7 +87,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title fw-bold" id="newsModalLabel"></h5>
+                            <h5 class="modal-title fw-bold p-4 fs-3" id="newsModalLabel"></h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div id="newsdetailsModal" class="modal-body fw-semibold">

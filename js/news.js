@@ -32,24 +32,27 @@ const loadNews = async (categoryId) => {
     const res = await fetch(url);
     const data = await res.json();
     displayNews(data.data);
-    // console.log(data.data);
 
 }
 
 
 const displayNews = async news => {
+
     const newsCardContainer = document.getElementById('cards-container');
     newsCardContainer.innerHTML = ``;
+    const foundItemNumber = document.getElementById('found-items');
+    foundItemNumber.innerText = news.length + `  Items Found!`;
+
     const noNewsFound = document.getElementById('no-news-found');
+
     if (news.length === 0) {
         noNewsFound.classList.remove('d-none')
-
     }
     else {
         noNewsFound.classList.add('d-none')
     }
+
     for (const info of news) {
-        // console.log(info);
 
         const newsCard = document.createElement('div');
         newsCard.classList.add('card');
@@ -77,11 +80,11 @@ const displayNews = async news => {
                          <p><i class="fa-solid fa-eye"></i> ${info.total_view ? info.total_view : "No views!"}</p>
                          </div>
                          <div class="d-flex justify-content-between">
-                         <p><i class="fa-solid fa-star"></i></p>
-                         <p><i class="fa-solid fa-star"></i></p>
-                         <p><i class="fa-solid fa-star"></i></p>
-                         <p><i class="fa-solid fa-star"></i></p>
-                         <p><i class="fa-solid fa-star-half-stroke"></i></p>
+                          <p><i class="fa-solid fa-star"></i></p>
+                          <p><i class="fa-solid fa-star"></i></p>
+                          <p><i class="fa-solid fa-star"></i></p>
+                          <p><i class="fa-solid fa-star"></i></p>
+                          <p><i class="fa-solid fa-star-half-stroke"></i></p>
 
                          </div>
                          <div>
@@ -95,8 +98,11 @@ const displayNews = async news => {
                  </div>
         `;
         newsCardContainer.appendChild(newsCard);
+        // console.log(info.total_view)
     }
+
     toggleSpinners(false);
+
 }
 
 const loadNewsDetails = async id => {
@@ -105,26 +111,28 @@ const loadNewsDetails = async id => {
     try {
         const res = await fetch(url);
         const data = await res.json();
+
         displayNewsDetails(data.data[0]);
     }
     catch (error) {
         console.log(error);
     }
 
-
 }
 
 const displayNewsDetails = newsdetails => {
+
     const modalTitle = document.getElementById('newsModalLabel');
     modalTitle.innerText = newsdetails.title;
     const newsModalDetails = document.getElementById('newsdetailsModal');
     newsModalDetails.innerHTML = `
     <img src="${newsdetails.image_url ? newsdetails.image_url : "No Data Avilable"}" class="img-fluid rounded-start pb-2" alt="...">
      <p>Details : ${newsdetails.details}</p>
-     <p>Author-Name : ${newsdetails.author.name ? newsdetails.author.name : "No names found!"}</p>
-     <p>Total-View : ${newsdetails.total_view ? newsdetails.total_view : "No views!"}</p>
-     
+     <p class="fw-bold">Author-Name : ${newsdetails.author.name ? newsdetails.author.name : "No names found!"}</p>
+     <p class="fw-bold">Total-View : ${newsdetails.total_view ? newsdetails.total_view : "No views!"} <i class="fa-solid fa-eye"></i></p>
+
     `;
+
 }
 
 
