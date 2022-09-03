@@ -30,6 +30,14 @@ const loadNews = async (categoryId) => {
 const displayNews = async news => {
     const newsCardContainer = document.getElementById('cards-container');
     newsCardContainer.innerHTML = ``;
+    const noNewsFound = document.getElementById('no-news-found');
+    if (news.length === 0) {
+        noNewsFound.classList.remove('d-none')
+        alert('On process!')
+    }
+    else {
+        noNewsFound.classList.add('d-none')
+    }
     for (const info of news) {
         // console.log(info);
 
@@ -45,14 +53,14 @@ const displayNews = async news => {
                      <div class="card-body">
                         <h5 class="card-title">${info.title}</h5>
                          <p class="card-text">${info.details.slice(0, 270)}...</p>
-                        <div class="d-flex justify-content-between pt-2">
+                        <div class="d-flex justify-content-between">
                         <div class="d-flex justify-content-between">
                          <div>
                           <img src="${info.author.img}" class="rounded-circle" alt="..." style="height: 50px;">
                          </div>
-                         <div class="px-3">
+                         <div class="px-2">
                            <p> ${info.author.name ? info.author.name : "No names found!"}</p>
-                           <p>${info.author.published_date}</p>
+                           <p>${info.author.published_date ? info.author.published_date.slice(0, 10) : "Not Publised yet!"}</p>
                          </div>
                         </div>
                          <div>
