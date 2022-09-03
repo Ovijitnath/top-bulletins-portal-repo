@@ -77,7 +77,8 @@ const displayNews = async news => {
 
                          </div>
                          <div>
-                         <a class="text-info"><i class="fa-solid fa-arrow-right-long"></i></a>
+                         
+                         <button onclick="loadNewsDetails('${info._id}')" type="button" class="btn  text-info fw-semibold" data-bs-toggle="modal" data-bs-target="#exampleModal">More <i class="fa-solid fa-arrow-right-long"></i></button>
                          </div>
 
                          </div>
@@ -90,6 +91,25 @@ const displayNews = async news => {
     toggleSpinners(false);
 }
 
+const loadNewsDetails = async id => {
+    const url = `https://openapi.programming-hero.com/api/news/${id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    displayNewsDetails(data.data[0]);
+
+}
+
+const displayNewsDetails = newsdetails => {
+    console.log(newsdetails);
+    const modalTitle = document.getElementById('newsModalLabel');
+    modalTitle.innerText = newsdetails.title;
+    const newsModalDetails = document.getElementById('newsdetailsModal');
+    newsModalDetails.innerHTML = `
+     <p>Details : ${newsdetails.details}</p>
+    `;
+}
+
+
 const toggleSpinners = isLoading => {
     const loaderSection = document.getElementById('loader');
     if (isLoading) {
@@ -99,6 +119,8 @@ const toggleSpinners = isLoading => {
         loaderSection.classList.add('d-none')
     }
 }
+
+
 
 // loadNews();
 loadAllNewsCatargory();
