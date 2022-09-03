@@ -1,7 +1,15 @@
 const loadAllNewsCatargory = async () => {
-    const response = await fetch("https://openapi.programming-hero.com/api/news/categories");
-    const data = await response.json();
-    displayAllNewsCatargory(data.data.news_category);
+    const url = `https://openapi.programming-hero.com/api/news/categories`;
+
+    try {
+        const response = await fetch(url);
+        const data = await response.json();
+        displayAllNewsCatargory(data.data.news_category);
+    }
+    catch (error) {
+        console.log(error);
+    }
+
 }
 const displayAllNewsCatargory = catagories => {
     const catagoryContainer = document.getElementById('catagory-container');
@@ -35,7 +43,7 @@ const displayNews = async news => {
     const noNewsFound = document.getElementById('no-news-found');
     if (news.length === 0) {
         noNewsFound.classList.remove('d-none')
-        alert('On process!Please visit this section later.')
+
     }
     else {
         noNewsFound.classList.add('d-none')
@@ -47,7 +55,7 @@ const displayNews = async news => {
         newsCard.classList.add('card');
         newsCard.classList.add('mb-3');
         newsCard.innerHTML = `
-        <div class="row g-0 shadow p-3 mb-5 bg-body rounded">
+        <div class="row g-0 shadow p-3 mb-5 bg-body rounded" onclick="loadNewsDetails('${info._id}')" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <div class="col-md-4">
                     <img src="${info.image_url}" class="img-fluid rounded-start p-1" alt="...">
                 </div>
@@ -93,19 +101,29 @@ const displayNews = async news => {
 
 const loadNewsDetails = async id => {
     const url = `https://openapi.programming-hero.com/api/news/${id}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    displayNewsDetails(data.data[0]);
+
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        displayNewsDetails(data.data[0]);
+    }
+    catch (error) {
+        console.log(error);
+    }
+
 
 }
 
 const displayNewsDetails = newsdetails => {
-    console.log(newsdetails);
     const modalTitle = document.getElementById('newsModalLabel');
     modalTitle.innerText = newsdetails.title;
     const newsModalDetails = document.getElementById('newsdetailsModal');
     newsModalDetails.innerHTML = `
+    <img src="${newsdetails.image_url ? newsdetails.image_url : "No Data Avilable"}" class="img-fluid rounded-start pb-2" alt="...">
      <p>Details : ${newsdetails.details}</p>
+     <p>Author-Name : ${newsdetails.author.name ? newsdetails.author.name : "No names found!"}</p>
+     <p>Total-View : ${newsdetails.total_view ? newsdetails.total_view : "No views!"}</p>
+     
     `;
 }
 
