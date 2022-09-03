@@ -24,7 +24,6 @@ const displayAllNewsCatargory = catagories => {
     });
 
 }
-// loadAllNewsCatargory();
 
 const loadNews = async (categoryId) => {
     const url = `https://openapi.programming-hero.com/api/news/category/0${categoryId}`
@@ -32,9 +31,7 @@ const loadNews = async (categoryId) => {
     const res = await fetch(url);
     const data = await res.json();
     displayNews(data.data);
-
 }
-
 
 const displayNews = async news => {
 
@@ -98,26 +95,20 @@ const displayNews = async news => {
                  </div>
         `;
         newsCardContainer.appendChild(newsCard);
-        // console.log(info.total_view)
     }
-
     toggleSpinners(false);
-
 }
 
 const loadNewsDetails = async id => {
     const url = `https://openapi.programming-hero.com/api/news/${id}`;
-
     try {
         const res = await fetch(url);
         const data = await res.json();
-
         displayNewsDetails(data.data[0]);
     }
     catch (error) {
         console.log(error);
     }
-
 }
 
 const displayNewsDetails = newsdetails => {
@@ -130,11 +121,9 @@ const displayNewsDetails = newsdetails => {
      <p>Details : ${newsdetails.details}</p>
      <p class="fw-bold">Author-Name : ${newsdetails.author.name ? newsdetails.author.name : "No names found!"}</p>
      <p class="fw-bold">Total-View : ${newsdetails.total_view ? newsdetails.total_view : "No views!"} <i class="fa-solid fa-eye"></i></p>
-
     `;
 
 }
-
 
 const toggleSpinners = isLoading => {
     const loaderSection = document.getElementById('loader');
@@ -146,7 +135,4 @@ const toggleSpinners = isLoading => {
     }
 }
 
-
-
-// loadNews();
 loadAllNewsCatargory();
