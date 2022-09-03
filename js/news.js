@@ -5,58 +5,58 @@ const loadAllNewsCatargory = async () => {
 }
 const displayAllNewsCatargory = catagories => {
     const catagoryContainer = document.getElementById('catagory-container');
+    catagoryContainer.innerHTML = ``;
     catagories.forEach(element => {
         const catagoryUl = document.createElement('ul');
         catagoryUl.classList.add('nav');
         catagoryUl.innerHTML = `
-        <li class="nav-item"> <button onclick="loadNews(${element.category_id.category_id})" type="button" class="btn fw-bold">${element.category_name}</button></li>`;
+        <li class="nav-item"> <a onclick="loadNews(${element.category_id})" type="button" class="btn fw-bold">${element.category_name}</a></li>`;
         catagoryContainer.appendChild(catagoryUl);
     });
 }
-loadAllNewsCatargory();
+// loadAllNewsCatargory();
 
-const loadNews = async () => {
-    const url = `https://openapi.programming-hero.com/api/news/category/01`
+const loadNews = async (categoryId) => {
+    const url = `https://openapi.programming-hero.com/api/news/category/0${categoryId}`
 
     const res = await fetch(url);
     const data = await res.json();
     displayNews(data.data);
-    // console.log(data);
+    // console.log(data.data);
 
 }
 
 
-const displayNews = news => {
+const displayNews = async news => {
     const newsCardContainer = document.getElementById('cards-container');
-    // news.forEach(info => {
-    //     console.log(info);
+    newsCardContainer.innerHTML = ``;
     for (const info of news) {
         // console.log(info);
+
         const newsCard = document.createElement('div');
         newsCard.classList.add('card');
         newsCard.classList.add('mb-3');
         newsCard.innerHTML = `
-        <div class="row g-0">
+        <div class="row g-0 shadow p-3 mb-5 bg-body rounded">
                 <div class="col-md-4">
                     <img src="${info.image_url}" class="img-fluid rounded-start p-1" alt="...">
                 </div>
                  <div class="col-md-8">
                      <div class="card-body">
                         <h5 class="card-title">${info.title}</h5>
-                         <p class="card-text">${info.details.slice(0, 220)}...</p>
-                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        <div class="d-flex justify-content-between">
+                         <p class="card-text">${info.details.slice(0, 270)}...</p>
+                        <div class="d-flex justify-content-between pt-2">
                         <div class="d-flex justify-content-between">
                          <div>
-                          <img src="${info.author.img}" class="rounded-start" alt="..." style="height: 50px;">
+                          <img src="${info.author.img}" class="rounded-circle" alt="..." style="height: 50px;">
                          </div>
                          <div class="px-3">
-                           <p> ${info.author.name}</p>
+                           <p> ${info.author.name ? info.author.name : "No names found!"}</p>
                            <p>${info.author.published_date}</p>
                          </div>
                         </div>
                          <div>
-                         <p><i class="fa-solid fa-eye"></i> ${info.total_view}</p>
+                         <p><i class="fa-solid fa-eye"></i> ${info.total_view ? info.total_view : "No views!"}</p>
                          </div>
                          <div class="d-flex justify-content-between">
                          <p><i class="fa-solid fa-star"></i></p>
@@ -67,7 +67,7 @@ const displayNews = news => {
 
                          </div>
                          <div>
-                         <button><i class="fa-solid fa-arrow-right"></i></button>
+                         <a class="text-info"><i class="fa-solid fa-arrow-right-long"></i></a>
                          </div>
 
                          </div>
@@ -79,5 +79,5 @@ const displayNews = news => {
     }
 }
 
-loadNews();
-// loadAllNewsCatargory();
+// loadNews();
+loadAllNewsCatargory();
