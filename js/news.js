@@ -11,14 +11,16 @@ const displayAllNewsCatargory = catagories => {
         catagoryUl.classList.add('nav');
         catagoryUl.innerHTML = `
         <li class="nav-item"> <a onclick="loadNews(${element.category_id})" type="button" class="btn fw-bold">${element.category_name}</a></li>`;
+
         catagoryContainer.appendChild(catagoryUl);
     });
+
 }
 // loadAllNewsCatargory();
 
 const loadNews = async (categoryId) => {
     const url = `https://openapi.programming-hero.com/api/news/category/0${categoryId}`
-
+    toggleSpinners(true);
     const res = await fetch(url);
     const data = await res.json();
     displayNews(data.data);
@@ -33,7 +35,7 @@ const displayNews = async news => {
     const noNewsFound = document.getElementById('no-news-found');
     if (news.length === 0) {
         noNewsFound.classList.remove('d-none')
-        alert('On process!')
+        alert('On process!Please visit this section later.')
     }
     else {
         noNewsFound.classList.add('d-none')
@@ -84,6 +86,17 @@ const displayNews = async news => {
                  </div>
         `;
         newsCardContainer.appendChild(newsCard);
+    }
+    toggleSpinners(false);
+}
+
+const toggleSpinners = isLoading => {
+    const loaderSection = document.getElementById('loader');
+    if (isLoading) {
+        loaderSection.classList.remove('d-none')
+    }
+    else {
+        loaderSection.classList.add('d-none')
     }
 }
 
