@@ -34,7 +34,9 @@ const loadNews = async (categoryId) => {
 }
 
 const displayNews = async news => {
-
+    const sorting = news.sort((a, b) => {
+        return b.total_view - a.total_view;
+    });
     const newsCardContainer = document.getElementById('cards-container');
     newsCardContainer.innerHTML = ``;
     const foundItemNumber = document.getElementById('found-items');
@@ -68,8 +70,8 @@ const displayNews = async news => {
                          <div>
                           <img src="${info.author.img}" class="rounded-circle" alt="..." style="height: 50px;">
                          </div>
-                         <div class="px-2">
-                           <p> ${info.author.name ? info.author.name : "No names found!"}</p>
+                         <div class="px-1">
+                           <p> ${info.author.name ? info.author.name : "No Name"}</p>
                            <p>${info.author.published_date ? info.author.published_date.slice(0, 10) : "Not Publised yet!"}</p>
                          </div>
                         </div>
@@ -80,13 +82,13 @@ const displayNews = async news => {
                           <p><i class="fa-solid fa-star"></i></p>
                           <p><i class="fa-solid fa-star"></i></p>
                           <p><i class="fa-solid fa-star"></i></p>
-                          <p><i class="fa-solid fa-star"></i></p>
+                          
                           <p><i class="fa-solid fa-star-half-stroke"></i></p>
 
                          </div>
                          <div>
                          
-                         <button onclick="loadNewsDetails('${info._id}')" type="button" class="btn  text-info fw-semibold" data-bs-toggle="modal" data-bs-target="#exampleModal">More <i class="fa-solid fa-arrow-right-long"></i></button>
+                         <button onclick="loadNewsDetails('${info._id}')" type="button" class="btn  text-info fw-semibold" data-bs-toggle="modal" data-bs-target="#exampleModal">More<i class="fa-solid fa-arrow-right-long"></i></button>
                          </div>
 
                          </div>
@@ -119,7 +121,7 @@ const displayNewsDetails = newsdetails => {
     newsModalDetails.innerHTML = `
     <img src="${newsdetails.image_url ? newsdetails.image_url : "No Data Avilable"}" class="img-fluid rounded-start pb-2" alt="...">
      <p>Details : ${newsdetails.details}</p>
-     <p class="fw-bold">Author-Name : ${newsdetails.author.name ? newsdetails.author.name : "No names found!"}</p>
+     <p class="fw-bold">Author-Name : ${newsdetails.author.name ? newsdetails.author.name : "No Name"}</p>
      <p class="fw-bold">Total-View : ${newsdetails.total_view ? newsdetails.total_view : "No views!"} <i class="fa-solid fa-eye"></i></p>
     `;
 
@@ -136,3 +138,4 @@ const toggleSpinners = isLoading => {
 }
 
 loadAllNewsCatargory();
+loadNews('1')
